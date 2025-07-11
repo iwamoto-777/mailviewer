@@ -1,0 +1,106 @@
+# static\css\mailviewer\style.css
+
+ファイル:
+  - ファイル名: mailviewer.css
+  - 説明: メールビューアのスタイルシート
+  - ファイルパス: mailviewer/static/mailviewer.css
+
+# 全体のスタイル
+body:
+  - フォント: Arial, sans-serif;
+  - 背景色: #f5f5f5;
+  - マージン: 0;
+  - 余白: 0;
+}
+
+.container:
+  - 最大幅: 1200px;
+  - マージン: 0 auto;
+  - パディング: 20px;
+  - 背景色: #ffffff;
+  - ボックスシャドウ: 0 2px 4px rgba(0, 0, 0, 0.1);
+  - ボックス角丸: 8px;
+
+h1:
+  - フォントサイズ: 24px;
+  - 色: #333333;
+  - 余白ボトム: 10px;
+  - 罫線ボトム: 2px solid #007bff;
+
+.upload-form:
+  - 背景色: #ffffff;
+  - マージン: 20px;
+  - パディング: 20px;
+  - ボックスシャドウ: 0 2px 4px rgba(0, 0, 0, 0.1);
+  - ボックス角丸: 8px;]
+
+.upload-form input[type="file"]:
+  - フォントサイズ: 16px;
+  - パディング: 10px;
+  - マージンボトム: 10px;
+  - 幅: 100%;
+  - ボーダー: 1px solid #ced4da;
+  - ボックス角丸: 4px;
+
+.upload-form button:
+  - フォントサイズ: 16px;
+  - パディング: 10px 20px;
+  - 色: #ffffff;
+  - 背景色: #007bff;
+  - ボーダー: none;
+  - ボックス角丸: 4px;
+  - カーソル: pointer;
+
+.upload-form button: hover {
+  - 背景色: darken(#0056b3);
+}
+
+.form-group:
+  - マージンボトム: 15px;
+
+.form-group label:
+  - 並び順: block;
+  - フォントサイズ: 16px; bold;
+  - マージンボトム: 5px;
+  - 色: #495057;
+
+.form-text:
+  - フォントサイズ: 14px;
+  - 色: #6c757d;
+  - マージントップ: 5px;
+
+.message:
+  - フォントサイズ: 14px;
+  - 色: #dc3545;
+  - マージン: 20px 0;
+  - 背景色: #d4edda;
+  - 罫線: 1px solid #c3e6cb;
+  - ボックス角丸: 4px;
+
+.back-link:
+  - フォントサイズ: 14px;
+  - 色: #007bff;
+  - テキストデコレーション: none;
+  - マージントップ: 20px;
+  - 余白: 8px 15px;
+  - ボックス角丸: 4px;
+  - 表示順: inline-block;
+  - 背景色: #6c757d;
+
+.back-link:hover {
+  - 背景色: darken(#6c757d, 10%);
+}
+
+.instructions:
+  - マージン: 20px 0;
+  - パディング: 15px;
+  - 背景色: #e2e3e5;
+  - ボックス角丸: 5px;
+
+.instructions h3:
+  - マージントップ: 0;
+  - 色: #495057;
+
+.instructions ul:
+  - マージン: 10px 0;
+  - パディング左: 20px;

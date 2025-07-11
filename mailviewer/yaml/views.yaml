@@ -1,0 +1,48 @@
+# /mailviewer/views.py
+画面名: メール一覧
+  - 関数一覧:
+    - 関数名: index
+      - 関数説明: メール一覧を表示する
+      - 処理:
+        - post:
+          - mailSearchFormから入力があった条件でmailデータを検索
+          - データを取得
+            - メインModel: mail: メールデータ
+            - サブmodel: なし
+            - 画面項目:
+              - 項目: メールID
+                - model: mail
+                - カラム: email_id
+              - 項目: タイトル
+                - model: mail
+                - カラム: subject
+              - 項目: FROM
+                - model: mail
+                - カラム: sender
+              - 項目: TO
+                - model: mail
+                - カラム: recipients
+              - 項目: CC
+                - model: mail
+                - カラム: cc
+              - 項目: 受信日
+                - model: mail
+                - カラム: sent_at
+              - 項目: 本文
+                - model: mail
+                - カラム: body
+              - 項目: 登録日
+                - model: mail
+                - カラム: insert_date
+              - 項目: 更新日
+                - model: mail
+                - カラム: update_date
+          - 0件: 
+            - message: データがありません。
+        - get:
+          - mailsは0件 
+         - コンテキスト:
+            title: メール一覧
+            message: message
+            mails: mails
+        - 表示するテンプレート: /templates/mailviewer/index.html

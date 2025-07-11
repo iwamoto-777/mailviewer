@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ title }}</h1>
+        
+        <!-- 検索フォーム -->
+        <div class="search-form">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form.subject.label_tag }}
+                        {{ form.subject }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.sender.label_tag }}
+                        {{ form.sender }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.recipients.label_tag }}
+                        {{ form.recipients }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form.cc.label_tag }}
+                        {{ form.cc }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.sent_at_from.label_tag }}
+                        {{ form.sent_at_from }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.sent_at_to.label_tag }}
+                        {{ form.sent_at_to }}
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">検索</button>
+                    <a href="{% url 'mailviewer:input' %}" class="btn btn-success">emlファイル取込</a>
+                </div>
+            </form>
+        </div>
+        
+        <!-- メッセージ表示 -->
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+        
+        <!-- メール一覧テーブル -->
+        {% if mails %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>タイトル</th>
+                        <th>FROM</th>
+                        <th>TO</th>
+                        <th>受信日</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mail in mails %}
+                    <tr>
+                        <td>{{ mail.subject|default:"(タイトルなし)" }}</td>
+                        <td>{{ mail.sender }}</td>
+                        <td>{{ mail.recipients }}</td>
+                        <td>{{ mail.sent_at }}</td>
+                        <td>
+                            <a href="{% url 'mailviewer:mail_detail' mail.email_id %}" class="btn">詳細</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>メールが見つかりません。</p>
+        {% endif %}
+    </div>
+</body>
+</html>

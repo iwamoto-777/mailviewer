@@ -1,0 +1,71 @@
+# /mailviewer/forms.py
+
+mailSearchForm:
+  - 説明: メール検索フォーム
+  - ベースのmodel: mail
+    fields:
+      - name: subject
+        type: テキスト入力
+        label: タイトル
+      - name: sender
+        type: テキスト入力
+        label: FROM
+      - name: recipients
+        type: テキスト入力
+        label: TO
+      - name: cc
+        type: テキスト入力
+        label: CC
+      - name: sent_at_from
+        type: 日付入力
+        label: 受信日（開始）
+      - name: sent_at_to
+        type: 日付入力
+        label: 受信日（終了）
+
+mailForm:
+  - 説明: メール本文を表示するフォームで全項目は変更不可
+  - ベースのmodel: mail
+    fields:
+      - name: mail
+        - type: 表示項目
+        - label: メールID
+      - name: subject
+        - type: 表示項目
+        - label: タイトル
+      - name: sender
+        - type: 表示項目
+        - label: FROM
+      - name: recipients
+        - type: 表示項目
+        - label: TO
+      - name: cc
+        - type: 表示項目
+        - label: CC
+      - name: sent_at
+        - type: 表示項目
+        - label: 受信日
+      - name: body
+        - type: 表示項目
+        - label: 本文
+
+
+attachForm:
+  - 説明: 添付ファイルを表示するフォームで全項目は変更不可
+  - ベースのmodel: attach
+    fields:
+      - name: attach_id
+        - type: 表示項目
+        - label: 添付ファイルID
+      - name: email_id
+        - type: 表示項目
+        - label: メールID
+      - name: attach_name
+        - type: 表示項目
+        - label: ファイル名
+      - name: attach_file
+        - type: ファイル
+        - label: 添付ファイル
+        - 補足:
+          - ダウンロード可
+          - 読み取り専用、書き込むことは無い

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ title }}</h1>
+        
+        <div class="instructions">
+            <h3>使用方法</h3>
+            <ul>
+                <li>emlファイルを選択してアップロードしてください。</li>
+                <li>複数のファイルを同時に選択できます。</li>
+                <li>アップロード後、メール一覧画面で確認できます。</li>
+            </ul>
+        </div>
+        
+        <!-- メッセージ表示 -->
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+        
+        <!-- アップロードフォーム -->
+        <div class="upload-form">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.eml_files.label_tag }}
+                    {{ form.eml_files }}
+                    {% if form.eml_files.help_text %}
+                        <small class="form-text">{{ form.eml_files.help_text }}</small>
+                    {% endif %}
+                </div>
+                <button type="submit">アップロード</button>
+            </form>
+        </div>
+        
+        <a href="{% url 'mailviewer:index' %}" class="back-link">メール一覧に戻る</a>
+    </div>
+</body>
+</html>

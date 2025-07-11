@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}メールビューア{% endblock %}</title>
+    <!-- <link rel="stylesheet" href="/static/mailviewer.css"> -->
+    <link rel="stylesheet" href="{% static 'mailviewer.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="left-pane" style="width: 30%; float: left;">
+            <h2>メールディレクトリ</h2>
+            {% block dir %}{% endblock %}
+        </div>
+        <div class="right-pane" style="width: 70%; float: right;">
+            <h2>メール一覧</h2>
+            {% block list %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

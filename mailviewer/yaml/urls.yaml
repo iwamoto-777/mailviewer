@@ -1,0 +1,18 @@
+# /mailviewer/yaml/urls.yaml
+# MailViewerシステムのURL設定を定義
+
+urls:
+  - path: ''
+    view: index
+    name: index
+    description: MailViewerシステムのメイン画面
+
+  - path: 'input/'
+    view: input_view
+    name: input
+    description: emlファイルの取込画面
+
+  - path: 'mail/<int:mail_id>/'
+    view: mail_detail
+    name: mail_detail
+    description: メール本文
