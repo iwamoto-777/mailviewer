@@ -1,5 +1,5 @@
 -- Project Name : MailPrev
--- Date/Time    : 2025/07/11 12:04:20
+-- Date/Time    : 2025/07/16 12:05:10
 -- Author       : 201001
 -- RDBMS Type   : PostgreSQL
 -- Application  : A5:SQL Mk-2
@@ -22,8 +22,8 @@ create table attach (
   , email_id integer not null
   , attach_name text not null
   , attach_file bytea
-  , insert_date date
-  , update_date date
+  , insert_date timestamp with time zone
+  , update_date timestamp with time zone
   , constraint attach_PKC primary key (attach_id)
 ) ;
 
@@ -38,11 +38,11 @@ create table mail (
   , sender text not null
   , recipients text not null
   , cc text not null
-  , sent_at date not null
+  , sent_at timestamp with time zone not null
   , body text not null
   , eml bytea
-  , insert_date date
-  , update_date date
+  , insert_date timestamp with time zone
+  , update_date timestamp with time zone
   , constraint mail_PKC primary key (email_id)
 ) ;
 

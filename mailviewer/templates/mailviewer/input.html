@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/mailviewer.css' %}">
 </head>
 <body>
     <div class="container">
@@ -28,14 +29,8 @@
         <div class="upload-form">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form-group">
-                    {{ form.eml_files.label_tag }}
-                    {{ form.eml_files }}
-                    {% if form.eml_files.help_text %}
-                        <small class="form-text">{{ form.eml_files.help_text }}</small>
-                    {% endif %}
-                </div>
-                <button type="submit">アップロード</button>
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">アップロード</button>
             </form>
         </div>
         

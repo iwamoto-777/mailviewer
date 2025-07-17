@@ -1,10 +1,9 @@
 # HTML生成
-# css
-css:
-  - static 'mailviewer.css
-
 全画面共通事項:
-  - baseテンプレート: base.html
+  - staticフォルダを参照できるように設定:{% load static %}
+  - テンプレート: base.html
+  - css: 
+    - ファイル位置: mailviewer/static/css/mailviewer.css
 
 base.htmlの定義:
   ファイル位置: mailviewer/base.html
@@ -15,8 +14,13 @@ base.htmlの定義:
     - コンテントエリア:
       - 説明: 画面のコンテンツエリア
       - 表示項目: コンテンツエリア
-          - 内容: {% block dir %}{% endblock %}
-          - 説明: コンテンツエリアは各画面で上書きされる
+          - 内容: 
+            - メールが格納されているディレクトを表示
+            - ディレクトリ名をクリックするとメール一覧が表示される
+            - ディレクトリ名はリンク形式で表示
+            - リンク先: /mailviewer/mail/<int:mail_id>/
+            - 説明: メールの詳細画面に遷移する
+            - 補足: 実装は現時点では保留
   画面右:
     - 説明: メールの一覧を表示
     - 幅:
@@ -28,8 +32,9 @@ base.htmlの定義:
           - 説明: コンテンツエリアは各画面で上書きされる
 
 index.htmlの定義:
-  テンプレート: mailviewer/base.html
   ファイル位置: mailviewer/index.html
+  継承テンプレート: mailviewer/base.html
+  ブロック開始: list
   画面名: メイン画面
     - 画面ID: index
     - ファイル名: index.html
@@ -65,3 +70,73 @@ index.htmlの定義:
           - 項目ID: sent_at
           - 項目説明: メールの送信日時を表示する
         - 補足: メールの送信日時はUTCで表示される
+  - ブロック終了: list
+
+input.htmlの定義:
+  ファイル位置: mailviewer/input.html
+  画面名: EMLファイル取込画面
+    - 画面ID: input
+    - ファイル名: input.html
+    - 画面説明: EMLファイルをアップロードしてメールを取込む
+    - 画面URL: /mailviewer/input/
+    - 画面コンテキスト:
+        title: EMLファイル取込
+        message: 空白
+    - 画面項目:
+      - アップロードフォーム:
+        - EmlUploadFormを使用してEMLファイルをアップロードする
+        - アップロードボタンを配置:
+          - ボタン名: アップロード
+          - ボタンの動作:
+            - ファイルを取り込むダイアログを表示する
+            - ファイルを選択したら、アップロードを実行する
+            - emlファイルをDBに保存する
+
+mail_detail.htmlの定義:
+  ファイル位置: mailviewer/mail_detail.html
+  画面名: メール詳細画面
+    - 画面ID: mail_detail
+    - ファイル名: mail_detail.html
+    - 画面説明: メールの詳細情報を表示する
+    - 画面URL: /mailviewer/mail_detail/
+    - 画面コンテキスト:
+        title: メール詳細
+        mail: mail
+        attachments: attachments
+    - 画面項目:
+      - メール情報:
+        - 項目: メールID
+          - model: mail
+          - カラム: email_id
+        - 項目: タイトル
+          - model: mail
+          - カラム: subject
+        - 項目: FROM
+          - model: mail
+          - カラム: sender
+        - 項目: TO
+          - model: mail
+          - カラム: recipients
+        - 項目: CC
+          - model: mail
+          - カラム: cc
+        - 項目: 受信日
+          - model: mail
+          - カラム: sent_at
+        - 項目: 本文
+          - model: mail
+          - カラム: body
+          - 改行・空白を表示する
+        - 項目: 登録日
+          - model: mail
+          - カラム: insert_date
+        - 項目: 更新日
+          - model: mail
+          - カラム: update_date
+      - 添付ファイル:
+        - 項目: 添付ファイル名
+          - model: attachments
+          - カラム: attach_name
+        - 項目: 添付ファイル
+          - model: attachments
+          - カラム: attach_file

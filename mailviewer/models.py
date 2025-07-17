@@ -11,11 +11,11 @@ class Mail(models.Model):
     sender = models.TextField(verbose_name='FROM')
     recipients = models.TextField(verbose_name='TO')
     cc = models.TextField(verbose_name='CC')
-    sent_at = models.DateField(verbose_name='受信日')
+    sent_at = models.DateTimeField(verbose_name='受信日')
     body = models.TextField(verbose_name='本文')
     eml = models.FileField(upload_to='eml_files/', blank=True, null=True, verbose_name='emlファイル:メールファイルを格納できる項目にする')
-    insert_date = models.DateField(auto_now_add=True, verbose_name='登録日')
-    update_date = models.DateField(auto_now=True, verbose_name='更新日')
+    insert_date = models.DateTimeField(auto_now_add=True, verbose_name='登録日')
+    update_date = models.DateTimeField(auto_now=True, verbose_name='更新日')
 
     class Meta:
         db_table = 'mail'
@@ -39,8 +39,8 @@ class Attach(models.Model):
     )
     attach_name = models.TextField(verbose_name='添付ファイル名')
     attach_file = models.FileField(upload_to='attachments/', blank=True, null=True, verbose_name='添付ファイル:メールの添付ファイルを格納できる項目にする')
-    insert_date = models.DateField(auto_now_add=True, verbose_name='作成日')
-    update_date = models.DateField(auto_now=True, verbose_name='更新日')
+    insert_date = models.DateTimeField(auto_now_add=True, verbose_name='作成日')
+    update_date = models.DateTimeField(auto_now=True, verbose_name='更新日')
 
     class Meta:
         db_table = 'attach'

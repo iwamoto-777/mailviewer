@@ -2,7 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.db.models import Q
 from .models import Mail, Attach
-from .forms import MailSearchForm
+from .forms import MailSearchForm, EmlUploadForm
+import email
+from email import policy
+from email.parser import BytesParser
+from datetime import datetime
+from pytz import timezone
 
 
 def index(request):
@@ -62,23 +67,48 @@ def input_view(request):
     """
     form = EmlUploadForm()
     message = ''
-    
+
     if request.method == 'POST':
         form = EmlUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            # TODO: emlファイルの解析とデータベース保存処理を実装
-            files = request.FILES.getlist('eml_files')
-            if files:
-                message = f'{len(files)}件のファイルがアップロードされました。'
-            else:
-                message = 'ファイルが選択されていません。'
-    
+            eml_file = request.FILES['eml_file']
+            try:
+                # EMLファイルを解析
+                msg = BytesParser(policy=policy.default).parse(eml_file)
+                
+                # sent_atのフォーマットを適用
+                sent_at = msg['date']
+                if sent_at:
+                    sent_at = datetime.strptime(sent_at, '%a, %d %b %Y %H:%M:%S %z')
+
+                # Mailモデルに保存
+                mail = Mail.objects.create(
+                    subject=msg['subject'],
+                    sender=msg['from'],
+                    recipients=msg['to'],
+                    cc=msg.get('cc', ''),
+                    sent_at=sent_at,
+                    body=msg.get_body(preferencelist=('plain', 'html')).get_content()
+                )
+
+                # 添付ファイルをAttachモデルに保存
+                for part in msg.iter_attachments():
+                    Attach.objects.create(
+                        email=mail,
+                        attach_name=part.get_filename(),
+                        attach_file=part.get_content()
+                    )
+
+                message = 'ファイルが正常にアップロードされ、処理されました。'
+            except Exception as e:
+                message = f'エラーが発生しました: {str(e)}'
+
     context = {
         'title': 'emlファイル取込',
         'form': form,
         'message': message
     }
-    
+
     return render(request, 'mailviewer/input.html', context)
 
 

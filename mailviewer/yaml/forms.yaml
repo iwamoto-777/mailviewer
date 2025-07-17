@@ -69,3 +69,15 @@ attachForm:
         - 補足:
           - ダウンロード可
           - 読み取り専用、書き込むことは無い
+
+
+EmlUploadForm:
+  - 説明: emlファイルアップロードフォーム
+  - ベースのmodel: eml
+    fields:
+      - name: eml_file
+        - type: ファイル
+        - label: EMLファイル
+        - 補足:
+          - アップロード可
+          - 読み取り専用、書き込むことは無い

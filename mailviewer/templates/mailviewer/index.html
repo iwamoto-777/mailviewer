@@ -1,62 +1,58 @@
+{% extends "mailviewer/base.html" %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
     <div class="container">
         <h1>{{ title }}</h1>
         
+        {% block list %}
         <!-- 検索フォーム -->
-        <div class="search-form">
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-row">
-                    <div class="form-group">
-                        {{ form.subject.label_tag }}
-                        {{ form.subject }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.sender.label_tag }}
-                        {{ form.sender }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.recipients.label_tag }}
-                        {{ form.recipients }}
-                    </div>
+        <h2>検索条件</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="subject">{{ form.subject.label }}</label>
+                    {{ form.subject }}
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        {{ form.cc.label_tag }}
-                        {{ form.cc }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.sent_at_from.label_tag }}
-                        {{ form.sent_at_from }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.sent_at_to.label_tag }}
-                        {{ form.sent_at_to }}
-                    </div>
+                <div class="form-group">
+                    <label for="sender">{{ form.sender.label }}</label>
+                    {{ form.sender }}
                 </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">検索</button>
-                    <a href="{% url 'mailviewer:input' %}" class="btn btn-success">emlファイル取込</a>
+                <div class="form-group">
+                    <label for="recipients">{{ form.recipients.label }}</label>
+                    {{ form.recipients }}
                 </div>
-            </form>
-        </div>
-        
-        <!-- メッセージ表示 -->
-        {% if message %}
-            <div class="message">{{ message }}</div>
-        {% endif %}
-        
-        <!-- メール一覧テーブル -->
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cc">{{ form.cc.label }}</label>
+                    {{ form.cc }}
+                </div>
+                <div class="form-group">
+                    <label for="sent_at_from">{{ form.sent_at_from.label }}</label>
+                    {{ form.sent_at_from }}
+                </div>
+                <div class="form-group">
+                    <label for="sent_at_to">{{ form.sent_at_to.label }}</label>
+                    {{ form.sent_at_to }}
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">検索</button>
+                <a href="{% url 'mailviewer:input' %}" class="btn btn-success">emlファイル取込</a>
+            </div>
+        </form>
+
+        <!-- 検索結果一覧 -->
+        <h2>検索結果</h2>
         {% if mails %}
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>タイトル</th>
@@ -83,6 +79,7 @@
         {% else %}
             <p>メールが見つかりません。</p>
         {% endif %}
+        {% endblock %}
     </div>
 </body>
 </html>

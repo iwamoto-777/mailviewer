@@ -133,3 +133,17 @@ class AttachForm(forms.ModelForm):
         # 全フィールドを読み取り専用に設定
         for field in self.fields.values():
             field.disabled = True
+
+
+class EmlUploadForm(forms.Form):
+    """
+    emlファイルアップロードフォーム
+    """
+    eml_file = forms.FileField(
+        label='EMLファイル',
+        required=True,
+        widget=forms.ClearableFileInput(attrs={
+            'class': 'form-control',
+            'accept': '.eml'
+        })
+    )
