@@ -11,19 +11,22 @@ body: タグ
   - 余白: 0;
 }
 
-container:class
-  - 最大幅: 1200px;
-  - マージン: 0 auto;
-  - パディング: 20px;
-  - 背景色: #ffffff;
-  - ボックスシャドウ: 0 2px 4px rgba(0, 0, 0, 0.1);
-  - ボックス角丸: 8px;
-
 h1:タグ
   - フォントサイズ: 24px;
   - 色: #333333;
   - 余白ボトム: 10px;
-  - 罫線ボトム: 2px solid #007bff;
+  - 罫線ボトム: 2px solid #46998d;
+
+h2:タグ
+  - フォントサイズ: 20px;
+  - 色: #333333;
+  - 余白ボトム: 10px;
+  - 罫線ボトム: 2px solid #46998d;
+
+h3:タグ
+  - フォントサイズ: 18px;
+  - 色: #333333;
+  - 余白ボトム: 10px;
 
 .upload-form:class
   - 背景色: #ffffff;
@@ -76,16 +79,16 @@ message:class
 
 back-link:class
   - フォントサイズ: 14px;
-  - 色: #007bff;
+  - 色: #ffffff;
   - テキストデコレーション: none;
   - マージントップ: 20px;
   - 余白: 8px 15px;
   - ボックス角丸: 4px;
   - 表示順: inline-block;
-  - 背景色: #6c757d;
+  - 背景色: #46998d;
 
 back-link:hover: class
-  - 背景色: darken(#6c757d, 10%);
+  - 背景色: darken(#46998d, 10%);
 
 instructions:class
   - マージン: 20px 0;
@@ -103,3 +106,4 @@ instructions ul:class
 
 mail-body:class
   - 改行: あり;
+  - フォントサイズ: 16px;

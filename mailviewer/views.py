@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.db.models import Q
 from .models import Mail, Attach
-from .forms import MailSearchForm, EmlUploadForm
+from .forms import MailSearchForm, EmlUploadForm, MailForm
 import email
 from email import policy
 from email.parser import BytesParser
@@ -118,11 +118,15 @@ def mail_detail(request, mail_id):
     """
     mail = get_object_or_404(Mail, email_id=mail_id)
     attachments = Attach.objects.filter(email=mail)
-    
+    mailForm = MailForm(instance=mail)
+    attachForm = Attach.objects.filter(email=mail)
+
     context = {
         'title': f'メール詳細 - {mail.subject}',
         'mail': mail,
-        'attachments': attachments
+        'attachments': attachments,
+        'mailForm': mailForm,
+        'attachForm': attachForm
     }
     
     return render(request, 'mailviewer/mail_detail.html', context)

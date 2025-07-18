@@ -99,34 +99,15 @@
       - 関数説明: メール本文の詳細表示
       - 処理:
         - post:
-          - メールIDに基づいてメールデータを取得
-            - メインModel: mail: メールデータ
-            - サブmodel: なし
-            - 画面項目:
-              - 項目: メールID
-                - model: mail
-                - カラム: email_id
-              - 項目: タイトル
-                - model: mail
-                - カラム: subject
-              - 項目: FROM
-                - model: mail
-                - カラム: sender
-              - 項目: TO
-                - model: mail
-                - カラム: recipients
-              - 項目: CC
-                - model: mail
-                - カラム: cc
-              - 項目: 受信日
-                - model: mail
-                - カラム: sent_at
-              - 項目: 本文
-                - model: mail
-                - カラム: body
+          - なし
         - get:
+          - mail_idを取得
+          - mail_idに対応するメールデータを取得
+          - メールデータをMailFormにセット
+          - mail_idに対応する添付ファイルを取得: データが無くても正常
+          - 添付ファイルをAttachFormにセット
           - コンテキスト:
             title: メール詳細
-            mail: mail
-            attachments: attachments
+            mailForm: バインドしたMailForm
+            attachForm: バインドしたAttachForm
         - 表示するテンプレート: /templates/mailviewer/mail_detail.html

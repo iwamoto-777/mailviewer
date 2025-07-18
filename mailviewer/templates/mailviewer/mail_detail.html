@@ -8,65 +8,48 @@
     <link rel="stylesheet" href="{% static 'css/mailviewer.css' %}">
 </head>
 <body>
-    <div class="container">
-        <h1>{{ title }}</h1>
-        
-        <!-- メールヘッダー情報 -->
-        <div class="mail-header">
-            <div class="mail-field">
-                <label>メールID:</label>
-                <div class="value">{{ mail.email_id }}</div>
-            </div>
-            <div class="mail-field">
-                <label>タイトル:</label>
-                <div class="value">{{ mail.subject|default:"(タイトルなし)" }}</div>
-            </div>
-            <div class="mail-field">
-                <label>FROM:</label>
-                <div class="value">{{ mail.sender }}</div>
-            </div>
-            <div class="mail-field">
-                <label>TO:</label>
-                <div class="value">{{ mail.recipients }}</div>
-            </div>
-            <div class="mail-field">
-                <label>CC:</label>
-                <div class="value">{{ mail.cc|default:"なし" }}</div>
-            </div>
-            <div class="mail-field">
-                <label>受信日:</label>
-                <div class="value">{{ mail.sent_at }}</div>
-            </div>
-            <div class="mail-field">
-                <label>登録日:</label>
-                <div class="value">{{ mail.insert_date }}</div>
-            </div>
-            <div class="mail-field">
-                <label>更新日:</label>
-                <div class="value">{{ mail.update_date }}</div>
-            </div>
-        </div>
-        
-        <!-- メール本文 -->
-        <h3>メール本文</h3>
-        <div class="mail-body">{{ mail.body|default:"本文がありません" }}</div>
-        
-        <!-- 添付ファイル -->
-        <div class="attachments">
-            <h3>添付ファイル</h3>
-            {% if attachments %}
-                {% for attachment in attachments %}
-                    <div class="attachment-item">
-                        <span>{{ attachment.attach_name }}</span>
-                        <a href="{% url 'mailviewer:download_attachment' attachment.attach_id %}" class="btn">ダウンロード</a>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div class="no-data">添付ファイルはありません</div>
-            {% endif %}
-        </div>
-        
-        <a href="{% url 'mailviewer:index' %}" class="back-link">メール一覧に戻る</a>
+    <h1>{{ mailForm.subject.value|default:"(タイトルなし)" }}</h1>
+    
+    <!-- メールヘッダー情報 -->
+    <table class="mail-header">
+        <tr>
+            <th>FROM:</th>
+            <td>{{ mailForm.sender.value }}</td>
+        </tr>
+        <tr>
+            <th>TO:</th>
+            <td>{{ mailForm.recipients.value }}</td>
+        </tr>
+        <tr>
+            <th>CC:</th>
+            <td>{{ mailForm.cc.value|default:"なし" }}</td>
+        </tr>
+        <tr>
+            <th>受信日:</th>
+            <td>{{ mailForm.sent_at.value|date:"Y/m/d H:i" }}</td>
+        </tr>
+    </table>
+    
+    <!-- メール本文 -->
+    <div class="mail-body">
+        <h2>メール本文</h2>
+        <pre>{{ mailForm.body.value|default:"本文がありません" }}</pre>
     </div>
+    
+    <!-- 添付ファイル -->
+    <div class="attachments">
+        <h2>添付ファイル</h2>
+        {% if attachForm.files %}
+            <ul>
+                {% for file in attachForm.files %}
+                    <li>{{ file.name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>(なし)</p>
+        {% endif %}
+    </div>
+    
+    <a href="{% url 'mailviewer:index' %}" class="back-link">メール一覧に戻る</a>
 </body>
 </html>
