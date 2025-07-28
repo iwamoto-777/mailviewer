@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from django.db.models import Q
 from .models import Mail, Attach
 from .forms import MailSearchForm, EmlUploadForm, MailForm
@@ -8,6 +8,7 @@ from email import policy
 from email.parser import BytesParser
 from datetime import datetime
 from pytz import timezone
+import mimetypes
 
 
 def index(request):
@@ -74,8 +75,9 @@ def input_view(request):
             eml_file = request.FILES['eml_file']
             try:
                 # EMLファイルを解析
-                msg = BytesParser(policy=policy.default).parse(eml_file)
-                
+                from io import BytesIO
+                msg = BytesParser(policy=policy.default).parse(BytesIO(eml_file.read()))
+
                 # sent_atのフォーマットを適用
                 sent_at = msg['date']
                 if sent_at:
@@ -116,17 +118,37 @@ def mail_detail(request, mail_id):
     """
     メール本文の詳細表示
     """
+    # メールデータを取得
     mail = get_object_or_404(Mail, email_id=mail_id)
-    attachments = Attach.objects.filter(email=mail)
-    mailForm = MailForm(instance=mail)
-    attachForm = Attach.objects.filter(email=mail)
 
+    # 添付ファイルを取得
+    attachments = Attach.objects.filter(email=mail)
+
+    # メールデータをMailFormにセット
+    mailForm = MailForm(instance=mail)
+
+    # コンテキストを設定
     context = {
         'title': f'メール詳細 - {mail.subject}',
-        'mail': mail,
-        'attachments': attachments,
         'mailForm': mailForm,
-        'attachForm': attachForm
+        'attachments': attachments
     }
-    
+
     return render(request, 'mailviewer/mail_detail.html', context)
+
+
+def attach(request, attach_id):
+    """
+    添付ファイルをダウンロードする
+    """
+    attach = get_object_or_404(Attach, attach_id=attach_id)
+    if not attach.attach_file:
+        return HttpResponse("ファイルが存在しません。", status=404)
+
+    mime_type, _ = mimetypes.guess_type(attach.attach_name)
+    response = HttpResponse(attach.attach_file, content_type=mime_type or 'application/octet-stream')
+    # 日本語ファイル名対応（RFC 6266）
+    from urllib.parse import quote
+    filename = quote(attach.attach_name)
+    response['Content-Disposition'] = f"attachment; filename*=UTF-8''{filename}"
+    return response

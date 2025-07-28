@@ -37,6 +37,13 @@
               - 項目: 更新日
                 - model: mail
                 - カラム: update_date
+              - 項目: 詳細リンク
+                - model: なし
+                - リンク先: mail_detail
+                - リンクパラメータ: email_id
+                - 処理: 
+                  - メールの詳細画面に遷移する
+                  - 詳細画面は別タブで開く
           - 0件: 
             - message: データがありません。
         - get:
@@ -89,6 +96,21 @@
                   - model: mail
                   - カラム: update_date
                   - フォーマット: YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]
+            - 添付ファイルをAttachモデルに保存
+            - メインModel: attach: 添付ファイル
+            - サブmodel: なし
+            - 画面項目:
+              - 項目: メールID
+                - model: attach
+                - カラム: email_id
+              - 項目: 添付ファイル名
+                - model: attach
+                - カラム: attach_name
+                - セットする値: part.get_filename()
+              - 項目: 添付ファイルデータ
+                - model: attach
+                - カラム: attach_file
+                - セットする値: part.get_content()
           - 取込完了メッセージを表示
         - get:
           - コンテキスト:
@@ -104,10 +126,23 @@
           - mail_idを取得
           - mail_idに対応するメールデータを取得
           - メールデータをMailFormにセット
-          - mail_idに対応する添付ファイルを取得: データが無くても正常
-          - 添付ファイルをAttachFormにセット
+          - mail_idに対応する添付ファイルを取得: 
+            - データが無い場合は空のリストを返す
+            - データがあればattachmentsにセット
           - コンテキスト:
             title: メール詳細
             mailForm: バインドしたMailForm
-            attachForm: バインドしたAttachForm
+            attachments: attachments
         - 表示するテンプレート: /templates/mailviewer/mail_detail.html
+
+    - 関数名: attach
+      - 関数説明: 添付ファイルをダウンロードする
+      - 処理:
+        - attach_idを取得
+        - attach_idに対応する添付ファイルデータを取得
+        - 添付ファイルが存在しない場合は404エラーを返す
+        - HttpResponseでファイルを返す
+          - ファイル名: attach.attach_nameの文字列（日本語含む）
+          - Content-Type: mime_type (推測されるMIMEタイプ)
+          - Content-Disposition: attachment; filename="attach.attach_name"
+        - 表示するテンプレート: なし (直接ファイルを返す)

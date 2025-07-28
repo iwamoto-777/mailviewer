@@ -13,7 +13,7 @@ class Mail(models.Model):
     cc = models.TextField(verbose_name='CC')
     sent_at = models.DateTimeField(verbose_name='受信日')
     body = models.TextField(verbose_name='本文')
-    eml = models.FileField(upload_to='eml_files/', blank=True, null=True, verbose_name='emlファイル:メールファイルを格納できる項目にする')
+    eml = models.BinaryField(blank=True, null=True, verbose_name='emlファイル:メールファイルを格納できる項目にする')
     insert_date = models.DateTimeField(auto_now_add=True, verbose_name='登録日')
     update_date = models.DateTimeField(auto_now=True, verbose_name='更新日')
 
@@ -38,7 +38,7 @@ class Attach(models.Model):
         verbose_name='メールID'
     )
     attach_name = models.TextField(verbose_name='添付ファイル名')
-    attach_file = models.FileField(upload_to='attachments/', blank=True, null=True, verbose_name='添付ファイル:メールの添付ファイルを格納できる項目にする')
+    attach_file = models.BinaryField(blank=True, null=True, verbose_name='添付ファイル:メールの添付ファイルを格納できる項目にする')
     insert_date = models.DateTimeField(auto_now_add=True, verbose_name='作成日')
     update_date = models.DateTimeField(auto_now=True, verbose_name='更新日')
 

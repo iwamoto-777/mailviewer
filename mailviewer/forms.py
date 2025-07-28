@@ -102,37 +102,37 @@ class MailForm(forms.ModelForm):
             field.disabled = True
 
 
-class AttachForm(forms.ModelForm):
-    """
-    添付ファイルを表示するフォーム（全項目は変更不可）
-    """
-    class Meta:
-        model = Attach
-        fields = [
-            'attach_id', 'email', 'attach_name', 'attach_file'
-        ]
-        labels = {
-            'attach_id': '添付ファイルID',
-            'email': 'メールID',
-            'attach_name': 'ファイル名',
-            'attach_file': '添付ファイル',
-        }
-        widgets = {
-            'attach_id': forms.TextInput(attrs={'readonly': True, 'class': 'form-control'}),
-            'email': forms.TextInput(attrs={'readonly': True, 'class': 'form-control'}),
-            'attach_name': forms.TextInput(attrs={'readonly': True, 'class': 'form-control'}),
-            'attach_file': forms.FileInput(attrs={
-                'readonly': True, 
-                'class': 'form-control',
-                'download': 'true'  # ダウンロード可
-            }),
-        }
+# class AttachForm(forms.ModelForm):
+#     """
+#     添付ファイルを表示するフォーム（全項目は変更不可）
+#     """
+#     class Meta:
+#         model = Attach
+#         fields = [
+#             'attach_id', 'email', 'attach_name', 'attach_file'
+#         ]
+#         labels = {
+#             'attach_id': '添付ファイルID',
+#             'email': 'メールID',
+#             'attach_name': 'ファイル名',
+#             'attach_file': '添付ファイル',
+#         }
+#         widgets = {
+#             'attach_id': forms.TextInput(attrs={'readonly': True, 'class': 'form-control'}),
+#             'email': forms.TextInput(attrs={'readonly': True, 'class': 'form-control'}),
+#             'attach_name': forms.TextInput(attrs={'readonly': True, 'class': 'form-control'}),
+#             'attach_file': forms.FileInput(attrs={
+#                 'readonly': True, 
+#                 'class': 'form-control',
+#                 'download': 'true'  # ダウンロード可
+#             }),
+#         }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # 全フィールドを読み取り専用に設定
-        for field in self.fields.values():
-            field.disabled = True
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         # 全フィールドを読み取り専用に設定
+#         for field in self.fields.values():
+#             field.disabled = True
 
 
 class EmlUploadForm(forms.Form):

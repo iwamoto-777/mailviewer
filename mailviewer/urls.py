@@ -12,4 +12,7 @@ urlpatterns = [
     
     # メール本文
     path('mail/<int:mail_id>/', views.mail_detail, name='mail_detail'),
+
+    # 添付ファイルのダウンロード
+    path('attach/<int:attach_id>/', views.attach, name='attach'),
 ]

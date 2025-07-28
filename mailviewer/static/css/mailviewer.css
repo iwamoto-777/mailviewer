@@ -53,18 +53,18 @@ h3 {
     border-radius: 4px;
 }
 
-.upload-form button {
-    font-size: 16px;
-    padding: 10px 20px;
+.btn-primary {
+    background-color: #3ca280;
     color: #ffffff;
-    background-color: #007bff;
     border: none;
     border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
 }
 
-.upload-form button:hover {
-    background-color: #0056b3;
+.btn-primary:hover {
+    background-color: #359373; /* darken(#3ca280, 10%) */
 }
 
 .form-group {
@@ -103,11 +103,11 @@ h3 {
     padding: 8px 15px;
     border-radius: 4px;
     display: inline-block;
-    background-color: #46998d;
+    background-color: #aaaaaa;
 }
 
 .back-link:hover {
-    background-color: #3e8e7e; /* darken(#46998d, 10%) */
+    background-color: #999999; /* darken(#aaaaaa, 10%) */
 }
 
 .instructions {
@@ -131,4 +131,21 @@ h3 {
 .mail-body {
     white-space: pre-wrap; /* 改行と空白を保持 */
     font-size: 16px;
+}
+
+/* a.btnのスタイル更新 */
+a.btn {
+    color: #3ca280;
+    border: 1px solid #3ca280; /* Added border */
+    text-decoration: none;
+    font-size: 14px;
+    padding: 11px 20px; /* Updated padding */
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* a.btnのホバースタイル追加 */
+a.btn:hover {
+    background-color: #3ca280;
+    color: #f5f5f5;
 }

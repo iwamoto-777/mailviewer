@@ -15,13 +15,13 @@ h1:タグ
   - フォントサイズ: 24px;
   - 色: #333333;
   - 余白ボトム: 10px;
-  - 罫線ボトム: 2px solid #46998d;
+  - 罫線ボトム: 2px solid #3ca280;
 
 h2:タグ
   - フォントサイズ: 20px;
   - 色: #333333;
   - 余白ボトム: 10px;
-  - 罫線ボトム: 2px solid #46998d;
+  - 罫線ボトム: 2px solid #3ca280;
 
 h3:タグ
   - フォントサイズ: 18px;
@@ -43,17 +43,17 @@ upload-form input[type="file"]:class
   - ボーダー: 1px solid #ced4da;
   - ボックス角丸: 4px;
 
-upload-form button:class
-  - フォントサイズ: 16px;
-  - パディング: 10px 20px;
-  - 色: #ffffff;
-  - 背景色: #007bff;
-  - ボーダー: none;
-  - ボックス角丸: 4px;
-  - カーソル: pointer;
+# upload-form button:class
+#   - フォントサイズ: 16px;
+#   - パディング: 10px 20px;
+#   - 色: #ffffff;
+#   - 背景色: #3ca280;
+#   - ボーダー: none;
+#   - ボックス角丸: 4px;
+#   - カーソル: pointer;
 
-upload-form button: hover:class
-  - 背景色: darken(#0056b3);
+# upload-form button: hover:class
+#   - 背景色: darken(#3ca280, 10%);
 
 form-group:class
   - マージンボトム: 15px;
@@ -85,10 +85,10 @@ back-link:class
   - 余白: 8px 15px;
   - ボックス角丸: 4px;
   - 表示順: inline-block;
-  - 背景色: #46998d;
+  - 背景色: #aaaaaa;
 
 back-link:hover: class
-  - 背景色: darken(#46998d, 10%);
+  - 背景色: darken(#aaaaaa, 10%);
 
 instructions:class
   - マージン: 20px 0;
@@ -107,3 +107,28 @@ instructions ul:class
 mail-body:class
   - 改行: あり;
   - フォントサイズ: 16px;
+
+btn-primary:class
+  - 背景色: #3ca280;
+  - 色: #ffffff;
+  - ボーダー: none;
+  - ボックス角丸: 4px;
+  - パディング: 10px 20px;
+  - フォントサイズ: 16px;
+  - カーソル: pointer;
+
+btn-primary:hover:class
+  - 背景色: darken(#3ca280, 10%);
+
+a:tag btn:class
+  - 色: #3ca280;
+  - 枠線: 1px solid #3ca280;
+  - フォントサイズ: 14px;
+  - テキストデコレーション: none;
+  - 余白: 11px 20px;
+  - ボックス角丸: 4px;
+  - 表示順: inline-block;
+
+a:tag btn:hover:class
+  - 背景色: #3ca280;
+  - 色: #f5f5f5;

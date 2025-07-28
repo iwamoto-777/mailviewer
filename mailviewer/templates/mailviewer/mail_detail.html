@@ -33,23 +33,22 @@
     <!-- メール本文 -->
     <div class="mail-body">
         <h2>メール本文</h2>
-        <pre>{{ mailForm.body.value|default:"本文がありません" }}</pre>
+        <pre style="white-space: pre-wrap;">{{ mailForm.body.value|default:"本文がありません" }}</pre>
     </div>
     
     <!-- 添付ファイル -->
     <div class="attachments">
         <h2>添付ファイル</h2>
-        {% if attachForm.files %}
-            <ul>
-                {% for file in attachForm.files %}
-                    <li>{{ file.name }}</li>
-                {% endfor %}
-            </ul>
+        {% if attachments %}
+          <ul>
+            {% for attach in attachments %}
+              <li><a href="/mailviewer/attach/{{ attach.attach_id }}/" download>{{ attach.attach_name }}</a></li>
+            {% endfor %}
+          </ul>
         {% else %}
-            <p>(なし)</p>
+          <p>(なし)</p>
         {% endif %}
     </div>
     
-    <a href="{% url 'mailviewer:index' %}" class="back-link">メール一覧に戻る</a>
 </body>
 </html>

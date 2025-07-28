@@ -16,3 +16,8 @@ urls:
     view: mail_detail
     name: mail_detail
     description: メール本文
+
+  - path: 'attach/<int:attach_id>/'
+    view: attach
+    name: attach
+    description: 添付ファイルのダウンロード
