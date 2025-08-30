@@ -1,25 +1,50 @@
-# GitHub Codespaces ♥️ Django
+# MailViewerプロジェクト
 
-Welcome to your shiny new Codespace running Django! We've got everything fired up and running for you to explore Django.
+MailViewerは、DjangoとPostgreSQLを利用したメール閲覧・管理システムです。
 
-You've got a blank canvas to work on from a git perspective as well. There's a single initial commit with what you're seeing right now - where you go from here is up to you!
+## 概要
+- emlファイルのアップロード・解析
+- メール一覧・検索・詳細表示
+- 添付ファイルの保存・ダウンロード（日本語ファイル名対応）
+- シンプルなUIと日本語対応
 
-Everything you do here is contained within this one codespace. There is no repository on GitHub yet. If and when you’re ready you can click "Publish Branch" and we’ll create your repository and push up your project. If you were just exploring then and have no further need for this code then you can simply delete your codespace and it's gone forever.
+## ディレクトリ構成
+- hello_world/ : Djangoプロジェクト本体
+- mailviewer/  : メール管理アプリケーション
+    - models.py, views.py, forms.py, templates/, static/, migrations/
+- menv/       : Python仮想環境
+- requirements.txt : 必要パッケージ
+- manage.py   : Django管理コマンド
 
-## installing dependancies
+## 主な機能
+- emlファイル取込画面でメールデータと添付ファイルを一括保存
+- メール一覧画面で検索・絞り込み
+- メール詳細画面で本文・添付ファイル表示
 
-```python
-pip install -r requirements.txt
-```
+## 実行方法
+1. 仮想環境の有効化
+2. 必要パッケージのインストール
+   ```
+   pip install -r requirements.txt
+   ```
+3. マイグレーション実行
+   ```
+   python manage.py migrate
+   ```
+4. サーバ起動
+   ```
+   python manage.py runserver
+   ```
 
-## To collect static files:
+## ライセンス
+MIT License
 
-```python
-python manage.py collectstatic
-```
-
-## To run this application:
-
-```python
-python manage.py runserver
-```
+## VerUP予定
+- デザインの改善
+    - 検索条件の並びをスリム化
+    - メール一覧はスマートな行のデザインに改善
+- メールファイルをディレクトリ構造で保存
+    - フォルダ形式のUIを追加
+    - フォルダの作成・変更・削除は右クリックで操作
+    - 取り込んだファイルは、取込用フォルダへ格納
+    - ファイル、フォルダはドラッグ＆ドロップで移動

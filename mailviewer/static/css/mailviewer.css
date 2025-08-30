@@ -18,7 +18,7 @@ h1 {
     font-size: 24px;
     color: #333333;
     margin-bottom: 10px;
-    border-bottom: 2px solid #46998d;
+    border-bottom: 2px solid #3ca280;
 }
 
 /* h2タグのスタイル */
@@ -26,7 +26,7 @@ h2 {
     font-size: 20px;
     color: #333333;
     margin-bottom: 10px;
-    border-bottom: 2px solid #46998d;
+    border-bottom: 2px solid #3ca280;
 }
 
 /* h3タグのスタイル */
@@ -53,45 +53,77 @@ h3 {
     border-radius: 4px;
 }
 
+/* btn-primaryのスタイル更新 */
 .btn-primary {
     background-color: #3ca280;
     color: #ffffff;
     border: none;
     border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
+    /* padding: 0px 0px; */
+    font-size: 14px;
     cursor: pointer;
 }
 
+/* btn-primaryのホバースタイル更新 */
 .btn-primary:hover {
-    background-color: #359373; /* darken(#3ca280, 10%) */
+    background-color: #2f8a6b; /* darken(#3ca280, 10%) */
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #495057;
-}
-
-.form-text {
+/* a.btnのスタイル更新 */
+a.btn {
+    height: 17px;
+    color: #3ca280;
+    border: 1px solid #3ca280;
     font-size: 14px;
-    color: #6c757d;
-    margin-top: 5px;
-}
-
-.message {
-    font-size: 14px;
-    color: #dc3545;
-    margin: 20px 0;
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
+    padding: 9px 8px;
     border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+}
+
+/* a.btnのホバースタイル更新 */
+a.btn:hover {
+    background-color: #3ca280;
+    color: #f5f5f5;
+}
+
+/* tableのスタイル更新 */
+.table {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    color: #495057;
+    border: 1px solid #dee2e6;
+    text-align: center; /* YAML仕様に基づく中央寄せ */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #e9ecef;
+}
+
+.table th, .table td {
+    font-size: 16px;
 }
 
 /* back-linkのスタイル更新 */
@@ -110,6 +142,7 @@ h3 {
     background-color: #999999; /* darken(#aaaaaa, 10%) */
 }
 
+/* instructionsのスタイル更新 */
 .instructions {
     margin: 20px 0;
     padding: 15px;
@@ -127,25 +160,20 @@ h3 {
     padding-left: 20px;
 }
 
-/* メール本文のスタイル */
+/* メール本文のスタイル更新 */
 .mail-body {
     white-space: pre-wrap; /* 改行と空白を保持 */
     font-size: 16px;
 }
 
-/* a.btnのスタイル更新 */
-a.btn {
-    color: #3ca280;
-    border: 1px solid #3ca280; /* Added border */
-    text-decoration: none;
-    font-size: 14px;
-    padding: 11px 20px; /* Updated padding */
-    border-radius: 4px;
-    display: inline-block;
+/* ボタンのスタイル更新 */
+.btn {
+    height: 37px;
+    width: 150px;
+    text-align: center;
 }
 
-/* a.btnのホバースタイル追加 */
-a.btn:hover {
-    background-color: #3ca280;
-    color: #f5f5f5;
+/* button-groupのスタイル更新 */
+.button-group {
+    margin-bottom: 22px;
 }

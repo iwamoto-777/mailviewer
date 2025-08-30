@@ -108,12 +108,18 @@ mail-body:class
   - 改行: あり;
   - フォントサイズ: 16px;
 
+btn:class
+  - 高さ: 36px;
+  - 幅: 150px;
+  - テキストアライン: center;
+  - パディング: 1px 1px;
+
 btn-primary:class
   - 背景色: #3ca280;
   - 色: #ffffff;
   - ボーダー: none;
   - ボックス角丸: 4px;
-  - パディング: 10px 20px;
+  - パディング: 3px 3px;
   - フォントサイズ: 16px;
   - カーソル: pointer;
 
@@ -125,10 +131,36 @@ a:tag btn:class
   - 枠線: 1px solid #3ca280;
   - フォントサイズ: 14px;
   - テキストデコレーション: none;
-  - 余白: 11px 20px;
+  - 余白: 3px 3px;
   - ボックス角丸: 4px;
   - 表示順: inline-block;
+  - 文字位置: center;
 
 a:tag btn:hover:class
   - 背景色: #3ca280;
   - 色: #f5f5f5;
+
+button-group:class
+  - マージンボトム: 20px;
+  - テキストアライン: center;
+
+table:class
+  - 幅: 100%;
+  - ボーダー: 1px solid #dee2e6;
+  - ボーダー間隔: collapse;
+  - マージンボトム: 20px;
+
+a.btn :class
+  - 高さ: 17px;
+  - 色: #3ca280;
+  - ボーダー: 1px solid #3ca280;
+  - フォントサイズ: 14px;
+  - パディング: 9px 8px;
+  - ボックス角丸: 4px;
+  - テキストデコレーション: none;
+  - 文字位置: center;
+  - 表示順: inline-block;
+}
+
+button-group:class
+  - マージンボトム: 22px;
